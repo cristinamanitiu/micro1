@@ -1,0 +1,14 @@
+version: '2.4'
+services:
+  localstack:
+    image: localstack/localstack:0.11.2
+    ports:
+      - "4575:4575"    # SNS
+      - "4576:4576"    # SQS
+    environment:
+      - "SERVICES=${LOCALSTACK_SERVICES:-sns,sqs}"
+      - "DEFAULT_REGION=${AWS_REGION:-us-east-1}"
+      - "HOSTNAME=${LOCALSTACK_HOSTNAME:-localhost}"
+      - "HOSTNAME_EXTERNAL=${LOCALSTACK_HOSTNAME_EXTERNAL:-localhost}"
+    volumes:
+      - /opt/localstack_templates:/opt/bootstrap/templates
